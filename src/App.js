@@ -28,8 +28,6 @@ const App = props => {
   const PER_PAGE = 10;
   const offset = currentPage * PER_PAGE;
 
-  
-
   const currentPageData = data
     .slice(offset, offset + PER_PAGE)
     .map((item, index) => {
@@ -258,7 +256,7 @@ const App = props => {
 
   const handleCalendar = e => {
     e.preventDefault();
-   
+
     let newData = data.map(item => {
       return Moment(item.launch_date_utc).format('YYYY-MM-DD');
     });
@@ -289,7 +287,6 @@ const App = props => {
             Moment(item.launch_date_utc).format('YYYY-MM-DD')
           )
         ) {
-          
           return item;
         }
       });
@@ -298,9 +295,7 @@ const App = props => {
     } else if (e.target.value == 'month') {
       //Past month logic
 
-      let lastMonth = new Date(
-        new Date().getTime() - 7 * 24 * 60 * 60 * 1000
-      );
+      let lastMonth = new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000);
       console.log('lastMonth', lastMonth);
       var filteredDatesMonth = newData.filter(
         p => new Date(p) <= yesterday && new Date(p) >= lastMonth
@@ -412,9 +407,7 @@ const App = props => {
       });
       resultData = resultData.filter(item => item);
       setData(resultData);
-    } 
-    
-    else {
+    } else {
       let result = newData.map(item => {
         if (Moment(item).isBetween(startDate, endDate)) {
           return item;
@@ -432,10 +425,8 @@ const App = props => {
       });
       resultData = resultData.filter(item => item);
       setData(resultData);
-       console.log('date ', resultData);
+      console.log('date ', resultData);
     }
-
-   
   };
 
   return (
@@ -501,70 +492,74 @@ const App = props => {
             <div className="dropdown-content row">
               <div className="row">
                 <p
-                  style={{cursor:'pointer'}}
+                  style={{ cursor: 'pointer' }}
                   onClick={e => {
                     e.target.value = 'week';
                     // setStart(e.target.value);
-                     handleCalendar(e)
+                    handleCalendar(e);
                   }}
                 >
                   Past Week{' '}
                 </p>
-                <p style={{cursor:'pointer'}}
+                <p
+                  style={{ cursor: 'pointer' }}
                   onClick={e => {
                     e.target.value = 'month';
                     // setStart(e.target.value);
-                     handleCalendar(e)
+                    handleCalendar(e);
                   }}
                 >
                   Past Month{' '}
                 </p>
-                <p style={{cursor:'pointer'}}
+                <p
+                  style={{ cursor: 'pointer' }}
                   onClick={e => {
                     e.target.value = '3month';
                     // setStart(e.target.value);
-                     handleCalendar(e)
+                    handleCalendar(e);
                   }}
                 >
                   Past 3 Month{' '}
                 </p>
-                <p style={{cursor:'pointer'}}
+                <p
+                  style={{ cursor: 'pointer' }}
                   onClick={e => {
                     e.target.value = '6month';
                     // setStart(e.target.value);
-                     handleCalendar(e)
+                    handleCalendar(e);
                   }}
                 >
                   Past 6 Month{' '}
                 </p>
-                <p style={{cursor:'pointer'}}
+                <p
+                  style={{ cursor: 'pointer' }}
                   onClick={e => {
                     e.target.value = '12month';
                     // setStart(e.target.value);
-                     handleCalendar(e)
+                    handleCalendar(e);
                   }}
                 >
                   Pas One Year{' '}
                 </p>
-                <p style={{cursor:'pointer'}}
+                <p
+                  style={{ cursor: 'pointer' }}
                   onClick={e => {
                     e.target.value = '3year';
                     // setStart(e.target.value);
-                     handleCalendar(e)
+                    handleCalendar(e);
                   }}
                 >
                   Pas 3 Year{' '}
                 </p>
               </div>
               <form className="row">
-              <label>Select in range: </label>
+                <label>Select in range: </label>
                 <input
                   className="form-control mt-2"
                   type="date"
                   value={start}
                   onChange={e => {
                     setStart(e.target.value);
-                    
                   }}
                   id="example-date-input"
                 />

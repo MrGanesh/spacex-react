@@ -1,0 +1,107 @@
+th{
+    background: #F4F5F7;
+    font-family: Inter;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 12px;
+/* or 100% */
+
+/* display: flex;
+align-items: center; */
+
+/* Nitro Gray 600 */
+
+color: #4B5563;
+}
+
+.logo{
+    border: 1px solid #F4F5F7 ;
+}
+
+td{
+font-family: Inter;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 12px;
+}
+
+.success{
+    font-family: Helvetica Neue;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 13px;
+    background: #DEF7EC;
+    color: #03543F;
+    border-radius: 20px;
+    padding: 4px 12px;
+    }
+
+.upcoming{
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 13px;
+    background: #FEF3C7;
+    color: #92400F;
+        border-radius: 20px;
+        padding: 4px 12px;
+}
+
+.failed{
+    background: #FDE2E1;
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 13px;
+    color:#981B1C;
+        border-radius: 20px;
+        padding: 4px 12px;
+}
+
+.paginate{
+    float: right;
+}
+.table-data{
+    border: 1px solid #E4E4E7;
+}
+
+.pagination{
+    width: 40px;
+height: 40px;
+left: 957px;
+top: 880px;
+
+border: 1px solid #E4E4E7;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.leftBtn{
+      height: 40px;
+    border: 1px solid #e5e5e5;
+    width: 150px;
+    padding: 8px;
+    font-weight: 400;
+}

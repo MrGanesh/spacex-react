@@ -27,6 +27,9 @@ const App = props => {
 
   const PER_PAGE = 10;
   const offset = currentPage * PER_PAGE;
+
+  
+
   const currentPageData = data
     .slice(offset, offset + PER_PAGE)
     .map((item, index) => {
@@ -255,6 +258,7 @@ const App = props => {
 
   const handleCalendar = e => {
     e.preventDefault();
+   
     let newData = data.map(item => {
       return Moment(item.launch_date_utc).format('YYYY-MM-DD');
     });
@@ -262,84 +266,176 @@ const App = props => {
     let startDate = Moment(start).format('YYYY-MM-DD');
     let endDate = Moment(end).format('YYYY-MM-DD');
 
-     let yesterday=new Date(new Date().getTime() - (1 * 24 * 60 * 60 * 1000));
-   
-    //Past week logic
+    let yesterday = new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000);
 
-        let last7days=new Date(new Date().getTime() - (1095 * 24 * 60 * 60 * 1000));
-  console.log("last7Days", last7days)
-  var filteredDateslast7days=newData.filter(p => new Date(p) <= yesterday && new Date(p) >= last7days); 
-       
-       
-         console.log('filteredDateslast7days', filteredDateslast7days);
+    if (e.target.value == 'week') {
+      //Past week logic
 
+      let last7days = new Date(
+        new Date().getTime() - 1095 * 24 * 60 * 60 * 1000
+      );
+      console.log('last7Days', last7days);
+      var filteredDateslast7days = newData.filter(
+        p => new Date(p) <= yesterday && new Date(p) >= last7days
+      );
 
-    //Past month logic
+      console.log('filteredDateslast7days', filteredDateslast7days);
+      // console.log('launch_date_utc', Moment(data[0].launch_date_utc).format('YYYY-MM-DD'));
+      // console.log('newData', newData);
 
-            let lastMonth=new Date(new Date().getTime() - (1095 * 24 * 60 * 60 * 1000));
-  console.log("lastMonth", lastMonth)
-  var filteredDatesMonth=newData.filter(p => new Date(p) <= yesterday && new Date(p) >= lastMonth); 
-       
-        
-         console.log('filteredDatesMonth', filteredDatesMonth);
-       
+      let resultData7days = data.map(item => {
+        if (
+          filteredDateslast7days.includes(
+            Moment(item.launch_date_utc).format('YYYY-MM-DD')
+          )
+        ) {
+          
+          return item;
+        }
+      });
+      resultData7days = resultData7days.filter(item => item);
+      setData(resultData7days);
+    } else if (e.target.value == 'month') {
+      //Past month logic
 
-    //Past 3 month logic
+      let lastMonth = new Date(
+        new Date().getTime() - 7 * 24 * 60 * 60 * 1000
+      );
+      console.log('lastMonth', lastMonth);
+      var filteredDatesMonth = newData.filter(
+        p => new Date(p) <= yesterday && new Date(p) >= lastMonth
+      );
 
-       
-       let last3Month=new Date(new Date().getTime() - (1095 * 24 * 60 * 60 * 1000));
-  console.log("last3Month", last3Month)
-  var filteredDates3Month=newData.filter(p => new Date(p) <= yesterday && new Date(p) >= last3Month); 
-         console.log("filteredDates3Month", filteredDates3Month)
-       
+      console.log('filteredDatesMonth', filteredDatesMonth);
 
+      let resultData = data.map(item => {
+        if (
+          filteredDatesMonth.includes(
+            Moment(item.launch_date_utc).format('YYYY-MM-DD')
+          )
+        ) {
+          return item;
+        }
+      });
+      resultData = resultData.filter(item => item);
+      setData(resultData);
+    } else if (e.target.value == '3month') {
+      //Past 3 month logic
+
+      let last3Month = new Date(
+        new Date().getTime() - 90 * 24 * 60 * 60 * 1000
+      );
+      console.log('last3Month', last3Month);
+      var filteredDates3Month = newData.filter(
+        p => new Date(p) <= yesterday && new Date(p) >= last3Month
+      );
+      console.log('filteredDates3Month', filteredDates3Month);
+
+      let resultData = data.map(item => {
+        if (
+          filteredDates3Month.includes(
+            Moment(item.launch_date_utc).format('YYYY-MM-DD')
+          )
+        ) {
+          return item;
+        }
+      });
+      resultData = resultData.filter(item => item);
+      setData(resultData);
+    }
     //Past 6 month logic
+    else if (e.target.value == '6month') {
+      let last6Month = new Date(
+        new Date().getTime() - 180 * 24 * 60 * 60 * 1000
+      );
+      console.log('last6Month', last6Month);
+      var filteredDates6month = newData.filter(
+        p => new Date(p) <= yesterday && new Date(p) >= last6Month
+      );
+      console.log('filteredDates6month', filteredDates6month);
 
-         let last6Month=new Date(new Date().getTime() - (1095 * 24 * 60 * 60 * 1000));
-  console.log("last6Month", last6Month)
-  var filteredDates6month=newData.filter(p => new Date(p) <= yesterday && new Date(p) >= last6Month); 
-         console.log("filteredDates6month", filteredDates6month)
-       
+      let resultData = data.map(item => {
+        if (
+          filteredDates6month.includes(
+            Moment(item.launch_date_utc).format('YYYY-MM-DD')
+          )
+        ) {
+          return item;
+        }
+      });
+      resultData = resultData.filter(item => item);
+      setData(resultData);
+    } else if (e.target.value == '12month') {
+      //Past 12 month logic
+      let last12Month = new Date(
+        new Date().getTime() - 365 * 24 * 60 * 60 * 1000
+      );
+      console.log('last12Month', last12Month);
+      var filteredDates12month = newData.filter(
+        p => new Date(p) <= yesterday && new Date(p) >= last12Month
+      );
+      console.log('filteredDates12month', filteredDates12month);
 
-       
+      let resultData = data.map(item => {
+        if (
+          filteredDates12month.includes(
+            Moment(item.launch_date_utc).format('YYYY-MM-DD')
+          )
+        ) {
+          return item;
+        }
+      });
+      resultData = resultData.filter(item => item);
+      setData(resultData);
+    } else if (e.target.value == '3year') {
+      //Past 36 month logic
+
+      let last36month = new Date(
+        new Date().getTime() - 1095 * 24 * 60 * 60 * 1000
+      );
+      console.log('last7Days', last36month);
+      var filteredDates36month = newData.filter(
+        p => new Date(p) <= yesterday && new Date(p) >= last36month
+      );
+
+      //  const filteredDates36month = newData.filter(d =>  currDate - new Date(d) > 1000);
+      console.log('filteredDates36month', filteredDates36month);
+
+      let resultData = data.map(item => {
+        if (
+          filteredDates36month.includes(
+            Moment(item.launch_date_utc).format('YYYY-MM-DD')
+          )
+        ) {
+          return item;
+        }
+      });
+      resultData = resultData.filter(item => item);
+      setData(resultData);
+    } 
     
-    
-    //Past 12 month logic
- let last12Month=new Date(new Date().getTime() - (1095 * 24 * 60 * 60 * 1000));
-  console.log("last12Month", last12Month)
-  var filteredDates12month=newData.filter(p => new Date(p) <= yesterday && new Date(p) >= last12Month); 
-         console.log("filteredDates12month", filteredDates12month)
-       
+    else {
+      let result = newData.map(item => {
+        if (Moment(item).isBetween(startDate, endDate)) {
+          return item;
+        }
+      });
+
+      result = result.filter(item => item);
+
+      let resultData = data.map(item => {
+        if (
+          result.includes(Moment(item.launch_date_utc).format('YYYY-MM-DD'))
+        ) {
+          return item;
+        }
+      });
+      resultData = resultData.filter(item => item);
+      setData(resultData);
+       console.log('date ', resultData);
+    }
+
    
-       
-    //Past 36 month logic
-
-      
-  let last36month=new Date(new Date().getTime() - (1095 * 24 * 60 * 60 * 1000));
-  console.log("last7Days", last36month)
-  var filteredDates36month=newData.filter(p => new Date(p) <= yesterday && new Date(p) >= last36month); 
-       
-        //  const filteredDates36month = newData.filter(d =>  currDate - new Date(d) > 1000);
-         console.log('filteredDates36month', filteredDates36month);
-       
-
-    let result = newData.map(item => {
-      if (Moment(item).isBetween(startDate, endDate)) {
-        return item;
-      }
-    });
-    result = result.filter(item => item);
-
-    let resultData = data.map(item => {
-      if (result.includes(Moment(item.launch_date_utc).format('YYYY-MM-DD'))) {
-        return item;
-      }
-      
-    });
-    resultData = resultData.filter(item => item);
-    setData(resultData);
-
-    console.log('date ', resultData);
   };
 
   return (
@@ -404,17 +500,71 @@ const App = props => {
             <div className="leftBtn">Mouse over me</div>
             <div className="dropdown-content row">
               <div className="row">
-                <p>Past Week </p>
-                <p>Past Month </p>
-                <p>Past 3 Month </p>
+                <p
+                  style={{cursor:'pointer'}}
+                  onClick={e => {
+                    e.target.value = 'week';
+                    // setStart(e.target.value);
+                     handleCalendar(e)
+                  }}
+                >
+                  Past Week{' '}
+                </p>
+                <p style={{cursor:'pointer'}}
+                  onClick={e => {
+                    e.target.value = 'month';
+                    // setStart(e.target.value);
+                     handleCalendar(e)
+                  }}
+                >
+                  Past Month{' '}
+                </p>
+                <p style={{cursor:'pointer'}}
+                  onClick={e => {
+                    e.target.value = '3month';
+                    // setStart(e.target.value);
+                     handleCalendar(e)
+                  }}
+                >
+                  Past 3 Month{' '}
+                </p>
+                <p style={{cursor:'pointer'}}
+                  onClick={e => {
+                    e.target.value = '6month';
+                    // setStart(e.target.value);
+                     handleCalendar(e)
+                  }}
+                >
+                  Past 6 Month{' '}
+                </p>
+                <p style={{cursor:'pointer'}}
+                  onClick={e => {
+                    e.target.value = '12month';
+                    // setStart(e.target.value);
+                     handleCalendar(e)
+                  }}
+                >
+                  Pas One Year{' '}
+                </p>
+                <p style={{cursor:'pointer'}}
+                  onClick={e => {
+                    e.target.value = '3year';
+                    // setStart(e.target.value);
+                     handleCalendar(e)
+                  }}
+                >
+                  Pas 3 Year{' '}
+                </p>
               </div>
               <form className="row">
+              <label>Select in range: </label>
                 <input
                   className="form-control mt-2"
                   type="date"
                   value={start}
                   onChange={e => {
                     setStart(e.target.value);
+                    
                   }}
                   id="example-date-input"
                 />
